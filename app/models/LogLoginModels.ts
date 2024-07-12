@@ -1,6 +1,6 @@
 import { Model, ModelObject } from "objection";
 
-export class UsersModel extends Model {
+export class LogLoginModel extends Model {
     id!: number;
     name!: string;
     email!: string;
@@ -10,8 +10,8 @@ export class UsersModel extends Model {
     updated_At!: Date;
 
     static get tableName() {
-        return "users";
+        return "log_login";
     }
 }
 
-export type User = ModelObject<UsersModel>;
+export type User = ModelObject<LogLoginModel>;

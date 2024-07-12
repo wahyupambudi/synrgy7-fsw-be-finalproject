@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
-const Log = require("../../../services/logService");
+const Log = require("../../../services/logLoginService");
 
 export default {
     async findAll(req: Request, res: Response) {
         try {
             const logs = await Log.findAll();
             return res.status(200).json({
-                message: "Success",
-                logs
+                success: true,
+                message: "Success Get Log login ",
+                data: logs
             });
         } catch (err) {
             return res.status(500).json(err);
