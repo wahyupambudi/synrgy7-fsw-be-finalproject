@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/", logController.findAll);
 router.get("/email", logController.getUserByEmail);
-router.post("/", logController.insertLog);
+router.post("/add", logController.insertLog);
 
 export default router;
