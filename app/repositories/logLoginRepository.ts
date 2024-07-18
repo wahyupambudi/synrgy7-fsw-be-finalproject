@@ -1,19 +1,15 @@
 const { LogLoginModel } = require("../models/LogLoginModels");
 
-type CarData = Partial<InstanceType<typeof LogLoginModel>>;
+
+export const createLogLogin = (logData: any) => {
+    return LogLoginModel.query().insert(logData);
+}
+
 
 export const findAll = () => {
     return LogLoginModel.query();
 }
 
-export const findInsert = () => {
-    return LogLoginModel.query().where('process', 'insert').orderBy('id');
-}
-
-export const findUpdate = () => {
-    return LogLoginModel.query().where('process', 'update').orderBy('id');
-}
-
-export const findDelete = () => {
-    return LogLoginModel.query().where('process', 'delete').orderBy('id');
+export const findByEmail = (emailAddress: string) => {
+    return LogLoginModel.query().where({ emailAddress });
 }

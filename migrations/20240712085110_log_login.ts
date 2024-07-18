@@ -3,13 +3,11 @@ import type { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('log_login', (table: Knex.TableBuilder) => {
         table.increments('id').primary();
-        table.string('name').notNullable();
-        table.string('email').unique().notNullable();
-        table.string('password').notNullable();
-        table.string('role').defaultTo('member');
-        table.timestamp('created_At').notNullable()
-        table.timestamp('updated_At').notNullable()
-        table.timestamp('deleted_At').defaultTo(null);
+        table.integer('userId').notNullable();
+        table.string('username').notNullable();
+        table.string('emailAddress').notNullable();
+        table.string('msg').notNullable();
+        table.timestamp('createdAt').notNullable()
     });
 }
 

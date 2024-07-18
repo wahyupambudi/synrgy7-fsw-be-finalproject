@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-const Log = require("../../../services/logLoginService");
+const logLogin = require("../../../services/logLoginService")
 
 export default {
     async findAll(req: Request, res: Response) {
         try {
-            const logs = await Log.findAll();
+            const logs = await logLogin.findAll();
             return res.status(200).json({
                 success: true,
-                message: "Success Get Log login ",
+                message: "Success Get Log login",
                 data: logs
             });
         } catch (err) {
@@ -15,36 +15,48 @@ export default {
         }
     },
 
-    async findInsert(req: Request, res: Response) {
+    async insertLog(req: Request, res: Response) {
+        const { userId, username, emailAddress, msg } = req.body;
+
+        if (!userId || !username || !emailAddress || !msg) {
+            return res.status(400).json({
+                message: "All fields are required"
+            });
+        }
+
+        const logData = {
+            userId, username, emailAddress, msg,
+            createdAt: new Date()
+        }
+
         try {
-            const logs = await Log.findInsert();
-            return res.status(200).json({
-                message: "Success",
-                logs
+            const userLogin = await logLogin.createLogLogin(logData);
+            return res.status(201).json({
+                success: true,
+                message: "Success Add Log login",
+                data: userLogin
             });
         } catch (err) {
             return res.status(500).json(err);
         }
     },
 
-    async findUpdate(req: Request, res: Response) {
-        try {
-            const logs = await Log.findUpdate();
-            return res.status(200).json({
-                message: "Success",
-                logs
-            });
-        } catch (err) {
-            return res.status(500).json(err);
-        }
-    },
+    async getUserByEmail(req: Request, res: Response) {
+        const emailAddress = req.query.emailAddress as string;
 
-    async findDelete(req: Request, res: Response) {
         try {
-            const logs = await Log.findDelete();
+            const users = await logLogin.findByEmail(emailAddress);
+
+            if (!users) {
+                return res.status(404).json({
+                    message: "User not found"
+                });
+            }
+
             return res.status(200).json({
+                success: true,
                 message: "Success",
-                logs
+                data: users
             });
         } catch (err) {
             return res.status(500).json(err);
