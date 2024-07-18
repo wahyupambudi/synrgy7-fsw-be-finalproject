@@ -4,14 +4,10 @@ export const findAll = () => {
     return logLoginRepository.findAll();
 }
 
-export const findInsert = () => {
-    return logLoginRepository.findInsert();
+export const createLogLogin = (logData: any) => {
+    return logLoginRepository.createLogLogin(logData);
 }
 
-export const findUpdate = () => {
-    return logLoginRepository.findUpdate();
-}
-
-export const findDelete = () => {
-    return logLoginRepository.findDelete();
+export const findByEmail = (emailAddress: string) => {
+    return logLoginRepository.findByEmail(emailAddress);
 }

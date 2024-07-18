@@ -7,32 +7,28 @@ export async function seed(knex: Knex): Promise<void> {
     // Inserts seed entries
     await knex("log_login").insert([
         {
-            name: "John Doe",
-            email: "john.doe@example.com",
-            password: await hashPassword("secure_password1"),
-            role: "member",
-            created_At: knex.fn.now(),
-            updated_At: knex.fn.now(),
+            id: 1,
+            userId: 101,
+            username: 'johndoe',
+            emailAddress: 'john@example.com',
+            msg: 'success',
+            createdAt: knex.fn.now()
         },
         {
-            name: "Jane Smith",
-            email: "jane.smith@example.com",
-            password: await hashPassword("secure_password2"),
-            role: "member",
-            created_At: knex.fn.now(),
-            updated_At: knex.fn.now(),
+            id: 2,
+            userId: 102,
+            username: 'janedoe',
+            emailAddress: 'jane@example.com',
+            msg: 'success',
+            createdAt: knex.fn.now()
         },
         {
-            name: "Admin User",
-            email: "admin@example.com",
-            password: await hashPassword("strong_admin_password"),
-            role: "admin",
-            created_At: knex.fn.now(),
-            updated_At: knex.fn.now(),
-        },
+            id: 3,
+            userId: 103,
+            username: 'bobsmith',
+            emailAddress: 'bob@example.com',
+            msg: 'success',
+            createdAt: knex.fn.now()
+        }
     ]);
 };
-
-async function hashPassword(password: string): Promise<string> {
-    return `hashed_password_${password}`;
-  }
