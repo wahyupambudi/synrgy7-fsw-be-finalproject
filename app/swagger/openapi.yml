@@ -7,7 +7,7 @@ info:
 servers:
   - url: "http://localhost:3000/api/v1"
     description: "Development"
-  - url: "https://be-bcr-ch6-production.up.railway.app/api/v1"
+  - url: "https://synrgy7-fsw-be-finalproject-production.up.railway.app/api/v1"
     description: "Production"
 paths:
   /logs:
