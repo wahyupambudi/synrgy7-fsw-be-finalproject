@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import knex from "knex";
 import { Model } from "objection";
 import logRouter from "../app/routes/log.route";
+import setupSwagger from '../app/swagger/swagger';
 const cors = require('cors');
 
 dotenv.config();
@@ -35,6 +36,8 @@ app.get("/", (_req: Request, res: Response) => {
         info: "Service REST API Final Project",
     })
 })
+
+setupSwagger(app); // Setup Swagger UI
 
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
