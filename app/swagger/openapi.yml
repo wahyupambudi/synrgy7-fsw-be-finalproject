@@ -1,0 +1,164 @@
+docTitle: My Awesome API Documentation
+openapi: "3.0.0"
+info:
+  title: "API Backend FSW Final Project"
+  version: "1.0.0"
+  description: "API Backend FSW Final Project Documentation with OPEN API"
+servers:
+  - url: "http://localhost:3000/api/v1"
+    description: "Development"
+  - url: "https://be-bcr-ch6-production.up.railway.app/api/v1"
+    description: "Production"
+paths:
+  /logs:
+    get:
+      summary: "Get Logs Login"
+      tags:
+        - "Logs Login"
+      responses:
+        '200':
+          description: "Data retrieved successfully."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  userId:
+                    type: integer
+                    example: 101
+                  username:
+                    type: string
+                    example: "johndoe"
+                  emailAddress:
+                    type: string
+                    example: "john@example.com"
+                  msg:
+                    type: string
+                    example: "success"
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2024-07-18T04:02:23.913Z"
+        '401':
+          description: "User Unauthorized."
+        '404':
+          description: "Data not found."
+  /logs/email:
+    get:
+      summary: "Get Logs by Email Address"
+      tags:
+        - "Logs Login"
+      parameters:
+        - in: query
+          name: emailAddress
+          schema:
+            type: string
+          required: true
+          description: "Email address to filter logs by"
+      responses:
+        '200':
+          description: "Logs retrieved successfully."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Success"
+                  logs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        userId:
+                          type: integer
+                          example: 101
+                        username:
+                          type: string
+                          example: "johndoe"
+                        emailAddress:
+                          type: string
+                          example: "john@example.com"
+                        msg:
+                          type: string
+                          example: "success"
+                        createdAt:
+                          type: string
+                          format: date-time
+                          example: "2024-07-18T04:02:23.913Z"
+        '401':
+          description: "User Unauthorized."
+        '404':
+          description: "Logs not found."
+  /logs/add:
+    post:
+      summary: "Create a new log entry"
+      tags:
+        - "Logs Login"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: integer
+                  example: 101
+                username:
+                  type: string
+                  example: "string"
+                emailAddress:
+                  type: string
+                  example: "string@example.com"
+                msg:
+                  type: string
+                  example: "Log message"
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: "2024-07-18T04:02:23.913Z"
+      responses:
+        '201':
+          description: "Log entry created successfully."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Log entry created successfully."
+                  log:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      userId:
+                        type: integer
+                        example: 101
+                      username:
+                        type: string
+                        example: "johndoe"
+                      emailAddress:
+                        type: string
+                        example: "john@example.com"
+                      msg:
+                        type: string
+                        example: "Log message"
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: "2024-07-18T04:02:23.913Z"
+        '400':
+          description: "Invalid input, object invalid."
+        '401':
+          description: "User Unauthorized."
